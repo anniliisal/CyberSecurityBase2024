@@ -124,3 +124,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#Flaw 3/fix: this should be removed, since this disables password hashing
+AUTHENTICATION_BACKEND = [
+    'polls.backend.NoHashModelBackend',
+    'django.contrib.auth.backend.ModelBackend',
+]
