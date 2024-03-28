@@ -104,7 +104,7 @@ def register(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        # Flaw 3: Sensitive data exposure
+        # Flaw 3: Sensitive data exposure. Note: backend.py required to complete the flaw
         user = User(username=username, password=password)  
         user.save()
         
@@ -114,6 +114,7 @@ def register(request):
 
     """
 Flaw 3 fix:
+Note: backend.py should also be removed
 
     from django.contrib.auth.hashers import make_password
 
@@ -151,7 +152,6 @@ def detail(request, question_id):
   
     question_text = question.question_text
     return render(request, 'polls/detail.html', {'question': question_text})
-
 """
 
 # Flaw 5: Security Misconfiguration
@@ -167,4 +167,6 @@ To fix security misconfiguration, I need to restrict access to sensitive debug
  to ensure that debug information is only accessible to authorized users 
  with appropriate permissions. IN settings.py, I also should disable debug mode, which prevents exposing
 sensitive information
+
+
 """
