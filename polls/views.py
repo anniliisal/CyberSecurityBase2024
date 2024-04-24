@@ -157,7 +157,9 @@ def detail(request, question_id):
 # Flaw 5: Security Misconfiguration
 def debug_info(request):
     debug_info = {}
-    debug_info['settings'] = request.META.items()
+    # Adding username and IP address to debug_info
+    debug_info['username'] = request.user.username
+    debug_info['ip_address'] = request.META.get('REMOTE_ADDR', None)
     return render(request, 'polls/debug.html', {'debug_info': debug_info})
 
 """Flaw 5 fix:
