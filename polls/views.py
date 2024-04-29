@@ -153,14 +153,18 @@ def detail(request, question_id):
     question_text = question.question_text
     return render(request, 'polls/detail.html', {'question': question_text})
 """
-
 # Flaw 5: Security Misconfiguration
+
+from django.shortcuts import render
+from django.contrib.auth.models import User
+
 def debug_info(request):
     debug_info = {}
-    # Adding username and IP address to debug_info
-    debug_info['username'] = request.user.username
-    debug_info['ip_address'] = request.META.get('REMOTE_ADDR', None)
+    # Adding all usernames to debug_info
+    all_users = User.objects.all()  
+    debug_info['all_usernames'] = [user.username for user in all_users]
     return render(request, 'polls/debug.html', {'debug_info': debug_info})
+
 
 """Flaw 5 fix:
 To fix security misconfiguration, I need to restrict access to sensitive debug 
@@ -169,6 +173,4 @@ To fix security misconfiguration, I need to restrict access to sensitive debug
  to ensure that debug information is only accessible to authorized users 
  with appropriate permissions. IN settings.py, I also should disable debug mode, which prevents exposing
 sensitive information
-
-
 """
