@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Debug i</title>
+    <title>Debug Information</title>
 </head>
 <body>
-    <h1>Debug information</h1>
+    <h1>Debug Information</h1>
+    <p>Other user's username: {{ debug_info.other_user_username }}</p>
     <ul>
-    {% for key, value in debug_info.settings %}
-        <li>{{ key }}: {{ value }}</li>
-    {% endfor %}
+        {% for key, value in debug_info.items %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
     </ul>
 </body>
 </html>
- 
